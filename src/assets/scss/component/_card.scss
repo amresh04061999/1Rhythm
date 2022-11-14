@@ -1,0 +1,11 @@
+$spacer: 1rem;
+
+@each $spaceAbbr, $spaceProp in ('m': 'margin', 'p': 'padding') {
+  @each $directionAbbr, $directionProp in ('t': 'top', 'r': 'right', 'b': 'bottom', 'l': 'left') {
+    @for $i from 1 through 20 {
+      [class$='#{$spaceAbbr}#{$directionAbbr}-#{$i}'] {
+        #{$spaceProp}-#{$directionProp}: $spacer * $i;
+      }
+    }
+  }
+}
