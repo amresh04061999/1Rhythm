@@ -9,169 +9,217 @@
       </div>
       <div class="col-12 col-lg-7 col-md-7 col-sm-12 col-xl-7 p-lg-5 ps-md-5 p-sm-5 p-5">
         <div class="card-container p-lg-4  p-md-3  p-sm-4 p-5  text-black bg-white overflow-auto ">
-        <div class="row">
-          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-12 ">
-                <!-- heading -->
-                <h4 class="flex-nowrap">Create Your Account</h4>
-                <span class="flex-nowrap">Already Have an Account?<a class="text-primary text-decoration-none flex-nowrap"> Sign In</a></span>
-          </div> 
-        </div><!-- start Form -->
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-12 ">
+              <!-- heading -->
+              <h4 class="flex-nowrap">Create Your Account</h4>
+              <span class="flex-nowrap">Already Have an Account?<a
+                  class="text-primary text-decoration-none flex-nowrap"> Sign In</a></span>
+            </div>
+          </div><!-- start Form -->
           <form [formGroup]="UserFrom" (ngSubmit)="onRegistration()">
             <div class="row">
               <!-- profile -->
-              <div class=" col-12  alert-dark col-md-12 col-lg-12 col-xl-12 my-4 d-flex justify-content-center justify-content-lg-start">
+              <div
+                class=" col-12  alert-dark col-md-12 col-lg-12 col-xl-12 my-4 d-flex justify-content-center justify-content-lg-start">
                 <div class="Profile">
-                 <div class="avatar-upload">
-                  <div class="avatar-edit">
-                      <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                  <div class="avatar-upload">
+                    <div class="avatar-edit">
+                      <input type='file' id="imageUpload" (change)="selectFile($event)"
+                        formControlName="DisplayPicture">
                       <label for="imageUpload" class="imageUpload"></label>
-                  </div>
-                  <div class="avatar-preview">
-                      <div id="imagePreview" class="imagePreview">
+                    </div>
+                    <div class="avatar-preview">
+                      <div class="imagePreview">
+                        <img [src]="base64String" *ngIf="base64String" id="imagePreview" class="imagePreview2">
                       </div>
+                    </div>
                   </div>
-              </div>
-                 
+                </div>
+                <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+                <div
+                  *ngIf="validator['DisplayPicture'].invalid && (isSubmited || validator['DisplayPicture'].dirty|| validator['DisplayPicture'].touched)">
+                  <span class="text-danger" *ngIf="validator['DisplayPicture'].errors?.['pattern']"> “image may
+                    contain .</span>
+
                 </div>
               </div>
             </div>
-              <div class="row">
-                <!-- firstname -->
-                <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                  <div class="mb-3">
-                    <label for="FistName" class="form-label fw-bold ">First Name <span
-                        class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="FirstName" placeholder="First Name" formControlName="FirstName">
-                    <div *ngIf="validator['FirstName'].invalid && (isSubmited || validator['FirstName'].dirty|| validator['FirstName'].touched)">
-                      <span class="text-danger" *ngIf="validator['FirstName'].errors?.['required']"> This Field Is Required.</span>
-                      <span class="text-danger" *ngIf="validator['FirstName'].errors?.['pattern']"> “First Name may contain letters only.</span>
-                      <span class="text-danger" *ngIf="validator['FirstName'].errors?.['maxlength'] && !(validator['FirstName'].errors?.['pattern'])"> First Name must be less than 25 characters.</span>
-                    </div>
-                  </div>
-                </div>
-                <!-- lastname -->
-                <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                  <div class="mb-3">
-                    <label for="LastName" class="form-label fw-bold ">Last Name <span
-                        class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="LastName" placeholder="Last Name" formControlName="LastName">
-                    <div *ngIf="validator['LastName'].invalid && (isSubmited || validator['LastName'].dirty|| validator['LastName'].touched)">
-                      <span class="text-danger" *ngIf="validator['LastName'].errors?.['required']"> This Field Is Required</span>
-                      <span class="text-danger" *ngIf="validator['LastName'].errors?.['pattern']"> Last Name may contain letters only.</span>
-                      <span class="text-danger" *ngIf="validator['LastName'].errors?.['maxlength'] && !(validator['LastName'].errors?.['pattern'])"> Last Name must be less than 25 characters.</span>
-                    </div>
+            <div class="row">
+              <!-- firstname -->
+              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <div class="mb-3">
+                  <label for="FistName" class="form-label fw-bold ">First Name <span
+                      class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="FirstName" placeholder="First Name"
+                    formControlName="FirstName">
+                  <div
+                    *ngIf="validator['FirstName'].invalid && (isSubmited || validator['FirstName'].dirty|| validator['FirstName'].touched)">
+                    <span class="text-danger" *ngIf="validator['FirstName'].errors?.['required']"> This Field Is
+                      Required.</span>
+                    <span class="text-danger" *ngIf="validator['FirstName'].errors?.['pattern']"> “First Name may
+                      contain letters only.</span>
+                    <span class="text-danger"
+                      *ngIf="validator['FirstName'].errors?.['maxlength'] && !(validator['FirstName'].errors?.['pattern'])">
+                      First Name must be less than 25 characters.</span>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <!-- Emai; ID -->
-                <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                  <div class="mb-3">
-                    <label for="Email" class="form-label fw-bold ">Email ID <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" id="Email" placeholder="Email ID" formControlName="Email">
-                    <div *ngIf="validator['Email'].invalid && (isSubmited || validator['Email'].dirty|| validator['Email'].touched)">
-                      <span class="text-danger" *ngIf="validator['Email'].errors?.['required']">This Field Is Required</span>
-                      <span class="text-danger" *ngIf="validator['Email'].errors?.['pattern']"> Please enter valid email id.</span>
-                      <span class="text-danger" *ngIf="validator['Email'].errors?.['maxlength'] && !(validator['Email'].errors?.['pattern'])"> Email Id must be less than 50 characters.</span>
-                    </div>
-                  </div>
-                </div>
-                <!-- Password -->
-                <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                  <div class="mb-3">
-                    <label for="Password" class="form-label fw-bold ">Password <span
-                        class="text-danger">*</span></label>
-                    <input type="password" class="form-control" id="Password" placeholder="Password" formControlName="Password">
-                    <div *ngIf="validator['Password'].invalid && (isSubmited || validator['Password'].dirty|| validator['Password'].touched)">
-                      <span class="text-danger" *ngIf="validator['Password'].errors?.['required']">This Field Is Required</span>
-                      <span class="text-danger" *ngIf="validator['Password'].errors?.['pattern']">Password must contain 1 uppercase alphabet, 1 numeric value, and 1 special character
-                        and 1 special character</span>
-                      <span class="text-danger" *ngIf="((validator['Password'].errors?.['minlength']|| validator['Password'].pristine) ||validator['Password'].errors?.['maxlength']) && !(validator['Password'].errors?.['pattern'])"> Password must be
-                        between 8-30 characters.</span>
-                    </div>
+              <!-- lastname -->
+              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <div class="mb-3">
+                  <label for="LastName" class="form-label fw-bold ">Last Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="LastName" placeholder="Last Name"
+                    formControlName="LastName">
+                  <div
+                    *ngIf="validator['LastName'].invalid && (isSubmited || validator['LastName'].dirty|| validator['LastName'].touched)">
+                    <span class="text-danger" *ngIf="validator['LastName'].errors?.['required']"> This Field Is
+                      Required</span>
+                    <span class="text-danger" *ngIf="validator['LastName'].errors?.['pattern']"> Last Name may contain
+                      letters only.</span>
+                    <span class="text-danger"
+                      *ngIf="validator['LastName'].errors?.['maxlength'] && !(validator['LastName'].errors?.['pattern'])">
+                      Last Name must be less than 25 characters.</span>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <!-- Phone No-->
-                <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                  <div class="mb-3">
-                    <label for="Phone" class="form-label fw-bold ">Phone Number <span
-                        class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="Phone" placeholder="Phone Number" formControlName="Phone">
-                    <div *ngIf="validator['Phone'].invalid && (isSubmited || validator['Phone'].dirty|| validator['Phone'].touched)">
-                      <span class="text-danger" *ngIf="validator['Phone'].errors?.['required']"> This Field Is Required</span>
-                      <span class="text-danger" *ngIf="validator['Phone'].errors?.['pattern']"> Contact Number must contain only numbers.</span>
-                      <span class="text-danger" *ngIf="(validator['Phone'].errors?.['maxlength'] || validator['Phone'].errors?.['minlength']) && !(validator['Phone'].errors?.['pattern'])"> Contact Number must be 10 numbers.</span>
-                    </div>
-                  </div>
-                </div>
-                <!-- UserType -->
-                <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                  <div class="mb-3">
-                    <label for="Password" class="form-label fw-bold ">UserType <span
-                        class="text-danger">*</span></label>
-                    <select id="inputState"   class="form-select" (change)="selectedOption($event)" formControlName="UserTypeId">
-                     <option selected>UserType</option>
-                      <option value="1">Studio Owner</option>
-                      <option value="2">Artist</option>
-                      <option value="3">General User</option>
-                    </select>
-                    <div *ngIf="validator['UserTypeId'].invalid && (isSubmited || validator['UserTypeId'].dirty|| validator['UserTypeId'].touched)">
-                      <span class="text-danger" *ngIf="validator['UserTypeId'].errors?.['required']"> This Field Is Required</span>
-                    </div>
+            </div>
+            <div class="row">
+              <!-- Emai; ID -->
+              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <div class="mb-3">
+                  <label for="Email" class="form-label fw-bold ">Email ID <span class="text-danger">*</span></label>
+                  <input type="email" class="form-control" id="Email" placeholder="Email ID" formControlName="Email">
+                  <div
+                    *ngIf="validator['Email'].invalid && (isSubmited || validator['Email'].dirty|| validator['Email'].touched)">
+                    <span class="text-danger" *ngIf="validator['Email'].errors?.['required']">This Field Is
+                      Required</span>
+                    <span class="text-danger" *ngIf="validator['Email'].errors?.['pattern']"> Please enter valid email
+                      id.</span>
+                    <span class="text-danger"
+                      *ngIf="validator['Email'].errors?.['maxlength'] && !(validator['Email'].errors?.['pattern'])">
+                      Email Id must be less than 50 characters.</span>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <!-- Select Country-->
-                <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                  <div class="mb-3">
-                    <label for="Country" class="form-label fw-bold ">Select Country <span
-                        class="text-danger">*</span></label>
-                    <select id="inputState" class="form-select">
-                      <option selected>India</option>
-                    </select>
-                  </div>
-                </div>
-                <div class=" col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                  <!-- Select State -->
-                  <div class="mb-3">
-                    <label for="State" class="form-label fw-bold ">Select State <span
-                        class="text-danger">*</span></label>
-                    <select id="State" class="form-select">
-                      <option selected>Select State</option>
-                      <option>Studio Owner</option>
-                      <option>Artist</option>
-                      <option>General User</option>
-                    </select>
-                  </div>
-                </div>
-                <div class=" col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                  <!-- Select City -->
-                  <div class="mb-3">
-                    <label for="City" class="form-label fw-bold ">Select City <span class="text-danger">*</span></label>
-                    <select  id="City" class="form-select">
-                      <option selected>Select City</option>
-                      <option>Studio Owner</option>
-                      <option>Artist</option>
-                      <option>General User</option>
-                    </select>
+              <!-- Password -->
+              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <div class="mb-3">
+                  <label for="Password" class="form-label fw-bold ">Password <span class="text-danger">*</span></label>
+                  <input type="password" class="form-control" id="Password" placeholder="Password"
+                    formControlName="Password">
+                  <div
+                    *ngIf="validator['Password'].invalid && (isSubmited || validator['Password'].dirty|| validator['Password'].touched)">
+                    <span class="text-danger" *ngIf="validator['Password'].errors?.['required']">This Field Is
+                      Required</span>
+                    <span class="text-danger" *ngIf="validator['Password'].errors?.['pattern']">Password must contain 1
+                      uppercase alphabet, 1 numeric value, and 1 special character
+                      and 1 special character</span>
+                    <span class="text-danger"
+                      *ngIf="validator['Password'].errors?.['minlength'] ||validator['Password'].errors?.['maxlength'] && !(validator['Password'].errors?.['pattern'])">
+                      Password must be
+                      between 8-30 characters.</span>
                   </div>
                 </div>
               </div>
-                <div class="row">
-                <div class="col-lg-12">
-                  <div class="d-flex ">
-                    <span class="fw-bold d-{{dNone}}">Note:</span>
+            </div>
+            <div class="row">
+              <!-- Phone No-->
+              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <div class="mb-3">
+                  <label for="Phone" class="form-label fw-bold ">Phone Number <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="Phone" placeholder="Phone Number" formControlName="Phone">
+                  <div
+                    *ngIf="validator['Phone'].invalid && (isSubmited || validator['Phone'].dirty|| validator['Phone'].touched)">
+                    <span class="text-danger" *ngIf="validator['Phone'].errors?.['required']"> This Field Is
+                      Required</span>
+                    <span class="text-danger" *ngIf="validator['Phone'].errors?.['pattern']"> Contact Number must
+                      contain only numbers.</span>
+                    <span class="text-danger"
+                      *ngIf="(validator['Phone'].errors?.['maxlength'] || validator['Phone'].errors?.['minlength']) && !(validator['Phone'].errors?.['pattern'])">
+                      Contact Number must be 10 numbers.</span>
+                  </div>
+                </div>
+              </div>
+              <!-- UserType -->
+              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <div class="mb-3">
+                  <label for="Password" class="form-label fw-bold ">UserType <span class="text-danger">*</span></label>
+                  <select id="inputState" class="form-select" (change)="selectedOption($event)"
+                    formControlName="UserTypeId">
+                    <option disabled value="UserType" selected> User Type</option>
+                    <option value="1">Studio Owner</option>
+                    <option value="2">Artist</option>
+                    <option value="3">General User</option>
+                  </select>
+                  <div
+                    *ngIf="validator['UserTypeId'].invalid && (isSubmited || validator['UserTypeId'].dirty|| validator['UserTypeId'].touched)">
+                    <span class="text-danger" *ngIf="validator['UserTypeId'].errors?.['required']"> This Field Is
+                      Required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!-- Select Country-->
+              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <div class="mb-3">
+                  <label for="Country" class="form-label fw-bold ">Select Country <span
+                      class="text-danger">*</span></label>
+                  <select id="inputState" class="form-select" disabled>
+                    <option selected value="1"> India</option>
+                  </select>
+                </div>
+              </div>
+              <div class=" col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                <!-- Select State -->
+                <div class="mb-3">
+                  <label for="State" class="form-label fw-bold ">Select State <span class="text-danger">*</span></label>
+                  <select id="State" class="form-select" formControlName="StateId">
+                    <option selected disabled>Select State</option>
+                    <option>Studio Owner</option>
+                    <option>Artist</option>
+                    <option>General User</option>
+                  </select>
+                  <div
+                    *ngIf="validator['StateId'].invalid && (isSubmited || validator['StateId'].dirty|| validator['StateId'].touched)">
+                    <span class="text-danger" *ngIf="validator['StateId'].errors?.['required']"> This Field Is
+                      Required</span>
+
+                  </div>
+                </div>
+              </div>
+              <div class=" col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                <!-- Select City -->
+                <div class="mb-3">
+                  <label for="City" class="form-label fw-bold ">Select City <span class="text-danger">*</span></label>
+                  <select id="City" class="form-select" formControlName="CityId">
+                    <option selected disabled>Select City</option>
+                    <option>Studio Owner</option>
+                    <option>Artist</option>
+                    <option>General User</option>
+                  </select>
+                  <div
+                    *ngIf="validator['CityId'].invalid && (isSubmited || validator['CityId'].dirty|| validator['CityId'].touched)">
+                    <span class="text-danger" *ngIf="validator['CityId'].errors?.['required']"> This Field Is
+                      Required</span>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="d-flex ">
+                  <span class="fw-bold d-{{dNone}}">Note:</span>
                   <p> {{note}}</p>
-                  </div>
-                  <button type="submit" class="btn btn-primary  p-1 rounded px-5 mx-1">Sign Up</button>
                 </div>
+                <button type="submit" class="btn btn-primary  p-1 rounded px-5 mx-1">Sign Up</button>
               </div>
+            </div>
           </form>
         </div>
       </div>
-      </div>
     </div>
   </div>
+</div>
