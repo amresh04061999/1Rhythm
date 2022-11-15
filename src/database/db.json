@@ -1,0 +1,52 @@
+{
+  "country": [
+    {
+      "id": 1,
+      "country": "india"
+    }
+  ],
+  "state": [
+    {
+      "id": 1,
+      "countryId": 1,
+      "state": "gujrat"
+    },
+    {
+      "id": 2,
+      "countryId": 1,
+      "state": "maharastra"
+    }
+  ],
+  "city": [
+    {
+      "id": 1,
+      "stateId": 1,
+      "city": "surat"
+    },
+    {
+      "id": 2,
+      "stateId": 1,
+      "city": "valsad"
+    },
+    {
+      "id": 3,
+      "stateId": 1,
+      "city": "vapi"
+    },
+    {
+      "id": 4,
+      "stateId": 2,
+      "city": "nashik"
+    },
+    {
+      "id": 5,
+      "stateId": 2,
+      "city": "pune"
+    },
+    {
+      "id": 6,
+      "stateId": 2,
+      "city": "mumbai"
+    }
+  ]
+}

@@ -1,32 +1,31 @@
 <div class="container-fuild h-100">
   <div class="bg-image h-100">
     <div class="row align-items-center h-100 ">
-      <div class="col-12 col-lg-5 col-md-5 col-sm-12 d-flex justify-content-center">
+      <div class="col-5  d-flex justify-content-center">
         <!-- logo -->
         <div class="logo">
-          <img src="../../../assets/images/1Rhythm logo.png" class="image-logo " alt="1Rhythm">
+          <img src="../../../assets/images/1Rhythm logo.png" class="img-fluid " alt="1Rhythm">
         </div>
       </div>
-      <div class="col-12 col-lg-7 col-md-7 col-sm-12 col-xl-7 p-lg-5 ps-md-5 p-sm-5 p-5">
-        <div class="card-container p-lg-4  p-md-3  p-sm-4 p-5  text-black bg-white overflow-auto ">
+      <div class="col-7  ">
+        <div class="card-container text-black bg-white p-5 " style="margin-right: 260px;">
           <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-12 ">
+            <div class="col-12">
               <!-- heading -->
-              <h4 class="flex-nowrap">Create Your Account</h4>
-              <span class="flex-nowrap">Already Have an Account?<a
+              <h4 class="flex-nowrap fw-bold fs-2 py-2">Create Your Account</h4>
+              <span class="flex-nowrap ">Already Have an Account?<a
                   class="text-primary text-decoration-none flex-nowrap"> Sign In</a></span>
             </div>
           </div><!-- start Form -->
           <form [formGroup]="UserFrom" (ngSubmit)="onRegistration()">
             <div class="row">
               <!-- profile -->
-              <div
-                class=" col-12  alert-dark col-md-12 col-lg-12 col-xl-12 my-4 d-flex justify-content-center justify-content-lg-start">
+              <div class=" col-12 d-flex py-5">
                 <div class="Profile">
                   <div class="avatar-upload">
                     <div class="avatar-edit">
-                      <input type='file' accept="" id="imageUpload" (change)="selectFile($event)"
-                        formControlName="DisplayPicture">
+                      <input type='file' accept=".jpg, .png, .jpeg, .heif" id="imageUpload"
+                        (change)="selectFile($event)" formControlName="DisplayPicture">
                       <label for="imageUpload" class="imageUpload"></label>
                     </div>
                     <div class="avatar-preview">
@@ -37,21 +36,21 @@
                   </div>
                 </div>
                 <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
-               
               </div>
             </div>
             <div class="row">
               <!-- firstname -->
-              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+              <div class=" col-6  ">
                 <div class="mb-3">
                   <label for="FistName" class="form-label fw-bold ">First Name <span
                       class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="FirstName" placeholder="First Name"
-                    formControlName="FirstName">
+                    formControlName="FirstName"
+                    [ngClass]="{'is-valid':validator['FirstName'].valid && validator['FirstName'].touched ,'is-invalid':validator['FirstName'].invalid && validator['FirstName'].touched }">
                   <div
                     *ngIf="validator['FirstName'].invalid && (isSubmited || validator['FirstName'].dirty|| validator['FirstName'].touched)">
-                    <span class="text-danger" *ngIf="validator['FirstName'].errors?.['required']"> This Field Is
-                      Required.</span>
+                    <span class="text-danger" *ngIf="validator['FirstName'].errors?.['required']"><small>This Field Is
+                        Required.</small> </span>
                     <span class="text-danger" *ngIf="validator['FirstName'].errors?.['pattern']"> “First Name may
                       contain letters only.</span>
                     <span class="text-danger"
@@ -61,7 +60,7 @@
                 </div>
               </div>
               <!-- lastname -->
-              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+              <div class=" col-6  ">
                 <div class="mb-3">
                   <label for="LastName" class="form-label fw-bold ">Last Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="LastName" placeholder="Last Name"
@@ -81,15 +80,17 @@
             </div>
             <div class="row">
               <!-- Emai; ID -->
-              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+              <div class=" col-6  ">
                 <div class="mb-3">
                   <label for="Email" class="form-label fw-bold ">Email ID <span class="text-danger">*</span></label>
-                  <input type="email" class="form-control" id="Email" placeholder="Email ID" formControlName="Email">
+                  <input type="text" class="form-control" id="Email" placeholder="Email ID" formControlName="Email"
+                    style="text-transform:lowercase">
                   <div
                     *ngIf="validator['Email'].invalid && (isSubmited || validator['Email'].dirty|| validator['Email'].touched)">
                     <span class="text-danger" *ngIf="validator['Email'].errors?.['required']">This Field Is
                       Required</span>
-                    <span class="text-danger" *ngIf="validator['Email'].errors?.['pattern']"> Please enter valid email
+                    <span class="text-danger" *ngIf="validator['Email'].errors?.['pattern']"> Please enter valid
+                      email
                       id.</span>
                     <span class="text-danger"
                       *ngIf="validator['Email'].errors?.['maxlength'] && !(validator['Email'].errors?.['pattern'])">
@@ -98,10 +99,10 @@
                 </div>
               </div>
               <!-- Password -->
-              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+              <div class=" col-6  ">
                 <div class="mb-3">
                   <label for="Password" class="form-label fw-bold ">Password <span class="text-danger">*</span></label>
-                  <input type="password" class="form-control" id="Password" placeholder="Password"
+                  <input type="text" class="form-control" id="Password" placeholder="Password"
                     formControlName="Password">
                   <div
                     *ngIf="validator['Password'].invalid && (isSubmited || validator['Password'].dirty|| validator['Password'].touched)">
@@ -120,7 +121,7 @@
             </div>
             <div class="row">
               <!-- Phone No-->
-              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+              <div class=" col-6  ">
                 <div class="mb-3">
                   <label for="Phone" class="form-label fw-bold ">Phone Number <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="Phone" placeholder="Phone Number" formControlName="Phone">
@@ -137,7 +138,7 @@
                 </div>
               </div>
               <!-- UserType -->
-              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+              <div class=" col-6  ">
                 <div class="mb-3">
                   <label for="Password" class="form-label fw-bold ">UserType <span class="text-danger">*</span></label>
                   <select id="inputState" class="form-select" (change)="selectedOption($event)"
@@ -157,24 +158,23 @@
             </div>
             <div class="row">
               <!-- Select Country-->
-              <div class=" col-12  col-sm-12 col-md-12 col-lg-6 col-xl-6">
+              <div class=" col-6  ">
                 <div class="mb-3">
                   <label for="Country" class="form-label fw-bold ">Select Country <span
                       class="text-danger">*</span></label>
-                  <select id="inputState" class="form-select" disabled>
-                    <option selected value="1"> India</option>
+                  <select id="inputState" class="form-select" formControlName="country"
+                    (change)="onChangeCountry($event)">
+                    <option *ngFor="let country of countries" value="{{country.id}}">{{country.country}}</option>
                   </select>
                 </div>
               </div>
-              <div class=" col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
+              <div class=" col-3 ">
                 <!-- Select State -->
                 <div class="mb-3">
                   <label for="State" class="form-label fw-bold ">Select State <span class="text-danger">*</span></label>
-                  <select id="State" class="form-select" formControlName="StateId">
+                  <select id="State" class="form-select" formControlName="state" (change)="onChangeState($event)">
                     <option selected disabled>Select State</option>
-                    <option>Studio Owner</option>
-                    <option>Artist</option>
-                    <option>General User</option>
+                    <option *ngFor="let state of statesData" value="{{state.id}}">{{state.state}}</option>
                   </select>
                   <div
                     *ngIf="validator['StateId'].invalid && (isSubmited || validator['StateId'].dirty|| validator['StateId'].touched)">
@@ -184,15 +184,13 @@
                   </div>
                 </div>
               </div>
-              <div class=" col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
+              <div class=" col-3  ">
                 <!-- Select City -->
                 <div class="mb-3">
                   <label for="City" class="form-label fw-bold ">Select City <span class="text-danger">*</span></label>
-                  <select id="City" class="form-select" formControlName="CityId">
+                  <select id="City" class="form-select" formControlName="city">
                     <option selected disabled>Select City</option>
-                    <option>Studio Owner</option>
-                    <option>Artist</option>
-                    <option>General User</option>
+                    <option *ngFor="let city of citiesData" value="{{city.id}}">{{city.city}}</option>
                   </select>
                   <div
                     *ngIf="validator['CityId'].invalid && (isSubmited || validator['CityId'].dirty|| validator['CityId'].touched)">
@@ -205,11 +203,11 @@
             </div>
             <div class="row">
               <div class="col-lg-12">
-                <div class="d-flex ">
+                <div class="d-flex py-4">
                   <span class="fw-bold d-{{dNone}}">Note:</span>
                   <p> {{note}}</p>
                 </div>
-                <button type="submit" class="btn btn-primary  p-1 rounded px-5 mx-1">Sign Up</button>
+                <button type="submit" class="btn btn-primary  p-2 rounded px-5 ">Sign Up</button>
               </div>
             </div>
           </form>
