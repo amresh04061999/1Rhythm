@@ -25,7 +25,7 @@
                 <div class="Profile">
                   <div class="avatar-upload">
                     <div class="avatar-edit">
-                      <input type='file' id="imageUpload" (change)="selectFile($event)"
+                      <input type='file' accept="" id="imageUpload" (change)="selectFile($event)"
                         formControlName="DisplayPicture">
                       <label for="imageUpload" class="imageUpload"></label>
                     </div>
@@ -37,12 +37,7 @@
                   </div>
                 </div>
                 <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
-                <div
-                  *ngIf="validator['DisplayPicture'].invalid && (isSubmited || validator['DisplayPicture'].dirty|| validator['DisplayPicture'].touched)">
-                  <span class="text-danger" *ngIf="validator['DisplayPicture'].errors?.['pattern']"> “image may
-                    contain .</span>
-
-                </div>
+               
               </div>
             </div>
             <div class="row">

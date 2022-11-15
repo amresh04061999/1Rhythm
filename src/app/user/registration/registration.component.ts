@@ -37,7 +37,7 @@ export class RegistrationComponent implements OnInit {
       StateId: ['', Validators.required],
       CityId: ['', Validators.required],
       UserTypeId: ['', Validators.required],
-      DisplayPicture: ['', Validators.pattern("[^\\s]+(.*?)\\.(jpg|jpeg|png|JPG|JPEG|PNG)$")]
+      DisplayPicture: ['']
     })
   }
   public onRegistration(): void {
@@ -75,14 +75,19 @@ export class RegistrationComponent implements OnInit {
     /**
      *show message validation
      */
-    let imageType = event.target.files[0].type;
-    console.log(imageType);
-
-    // if (imageType !== ("image/png" || "image/jpeg" || "image/jpg" || "image/heif")) {
-    //   this.msg = " “Please upload a valid file format”(Supported file  formats: .jpg, .png, .jpeg, .heif).";
-    //   this.base64String = ''
+    let  imageType = event.target.files[0]
+     if (!imageType.name.match(/\.(jpg|jpeg|png|heif)$/)) {
+      this.msg = "“Please upload a valid file format”(Supported file  formats: .jpg, .png, .jpeg, .heif).";
+      this.base64String = ''
+      return ;
+    }
+    //  let imageType = event.target.files[0].type;
+    // if (imageType.match(/image\/*/) == 'image/jpg' ) {
+    //   this.msg = "“Please upload a valid file format”(Supported file  formats: .jpg, .png, .jpeg, .heif).";
     //   return;
     // }
+   
+    
     let imageSize = event.target.files[0].size;
     if (imageSize >= 5000000) {
       this.msg = " “The maximum size of an image must be less than 5 MB”.";
@@ -102,9 +107,7 @@ export class RegistrationComponent implements OnInit {
       this.base64String = reader.result
       this.msg = "";
     }
-    if (this.imageFile) {
-      this.isImagevalue = true;
-    }
+   
   }
 
 }
